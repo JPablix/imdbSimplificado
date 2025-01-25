@@ -1,1 +1,8 @@
-<p>movies-list-page works!</p>
+<h1 class="text-3xl">Lista de Películas</h1>
+<div class="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 space-x-3 space-y-5">
+    @for (movie of movies; track $index) {
+        <app-movie-card 
+            [movie]="movie"
+        ></app-movie-card>
+    }
+</div>

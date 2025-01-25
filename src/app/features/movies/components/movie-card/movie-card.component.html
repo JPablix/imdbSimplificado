@@ -1,0 +1,28 @@
+<mat-card>
+    <img mat-card-image [src]="mainImage" [alt]="movie.title + ' poster image.'">
+    <mat-card-header>
+        <mat-card-title>
+           {{ movie.title }} 
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-chip-listbox>
+            @for (genre of movie.genre; track $index){
+                <mat-chip>{{ genre }}</mat-chip>
+            }
+        </mat-chip-listbox>
+    </mat-card-content>
+    <mat-card-actions class="flex justify-between">
+        <button mat-raised-button
+            [routerLink]="['/movies', movie.title]"
+            >
+            <mat-icon>edit</mat-icon>
+            Editar
+        </button>
+        <button mat-raised-button
+            >
+            <mat-icon>info</mat-icon>
+            Ver Info
+        </button>
+    </mat-card-actions>
+</mat-card>
