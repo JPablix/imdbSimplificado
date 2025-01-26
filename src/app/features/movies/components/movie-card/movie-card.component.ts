@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { MovieImagePipe } from '../../pipes/movie-image.pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -15,7 +18,8 @@ import { RouterModule } from '@angular/router';
     MatChipsModule,
     MatButtonModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    MovieImagePipe,
   ],
   templateUrl: './movie-card.component.html',
   styleUrl: './movie-card.component.scss'
@@ -24,19 +28,15 @@ export class MovieCardComponent {
   @Input()
   public movie!: Movie;
 
-  public mainImage = '';
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
-  constructor() { }
+  onMoreInfo(): void {
+    this.dialog.open( InfoDialogComponent, {
+      data: this.movie
+    })
+   }
 
-  ngOnInit(): void {
-    // Buscar en el arreglo de imagenes la que tenga el atributo 'main' en true
-    if (!this.movie.mainImage) {
-      this.mainImage = 'no-movie-image.jpg';
-      return;
-    }
-    this.mainImage = this.movie.mainImage ? `movies/${this.movie.mainImage}`: 'no-movie-image.jpg';
 
-    // const mainImage = this.movie.images.find(image => image.isMain);
-    // this.mainImage = this.movie.images.find(image => image.isMain)?.url ? `public/movies/${this.movie.images.find(image => image.isMain)?.url}` : 'no-movie-image.jpg';
-  }
 }

@@ -1,1 +1,67 @@
-<p>actors-detail-page works!</p>
+<div class="grid grid-cols-5 p-10 mb-5 space-x-2">
+    <div class="col-span-3">
+      <mat-card>
+        <mat-card-content>
+          <form class="grid grid-cols-2 gap-4" [formGroup]="actorForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="">
+              <mat-label for="name">Nombre</mat-label>
+              <input matInput required id="name" formControlName="name" type="text" />
+            </mat-form-field>
+            <mat-form-field class="">
+              <mat-label for="dateOfBirth">Fecha de Nacimiento</mat-label>
+              <input matInput id="dateOfBirth" formControlName="dateOfBirth" type="date" />
+            </mat-form-field>
+            <mat-form-field class="col-span-2">
+              <mat-label for="biography">Biografía</mat-label>
+              <textarea matInput id="biography" formControlName="biography"></textarea>
+            </mat-form-field>
+            <mat-form-field class="col-span-2">
+              <mat-label for="movies">Actuaciones en Películas (separadas por comas)</mat-label>
+              <input matInput id="movies" formControlName="movies" type="text" />
+            </mat-form-field>
+            <div class="col-span-2">
+              <mat-label for="mainImage">Imagen principal</mat-label>
+              <input id="mainImage" type="file" (change)="onImageSelect($event, 'mainImage')" />
+            </div>
+            <div class="col-span-2">
+              <label for="images">Otras imágenes</label>
+              <input id="images" type="file" multiple (change)="onImageSelect($event, 'images')" />
+            </div>
+            <div class="flex justify-between col-span-2">
+              <button mat-raised-button
+                      class="action-button" 
+                      type="button" 
+                      [routerLink]="['/actors']" 
+                      routerLinkActive="router-link-active"
+                      >Cancelar</button>
+              <button mat-raised-button
+                      [ngClass]="{'action-button-success': !actorForm.invalid, '': actorForm.invalid}"
+                      type="submit"
+                      [disabled]="actorForm.invalid"
+                      >Guardar película</button>
+              <button mat-raised-button
+                      class="action-button" 
+                      type="button" 
+                      *ngIf="formMode !== 'new'"
+                      (click)="onDelete()"
+                      >Eliminar película</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-span-2">
+      <div class="grid grid-cols-4 grid-auto-rows gap-4">
+        <div class="row-span-3 col-span-2">
+          <img [src]="currentActor.mainImage| actorImage" 
+          alt="">
+        </div>
+        @for (image of currentActor.images; track $index) {
+          <div class="row-span-1 col-span-1">
+            <img [src]="image| actorImage" 
+            alt="">
+          </div>
+        }
+      </div>
+    </div>
+  </div>

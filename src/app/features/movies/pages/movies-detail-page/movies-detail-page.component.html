@@ -1,25 +1,21 @@
-<div class="grid">
-  <div class="col-6 sm:col-6">
+<div class="grid grid-cols-5 p-10 mb-5 space-x-2">
+  <div class="col-span-3">
     <mat-card>
       <mat-card-content>
-        <form class="grid" [formGroup]="movieForm" (ngSubmit)="onSubmit()">
-          <mat-form-field class="col-12 sm:col-6">
+        <form class="grid grid-cols-2 gap-4" [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="">
             <mat-label for="title">Título</mat-label>
             <input matInput required id="title" formControlName="title" type="text" />
           </mat-form-field>
-          <mat-form-field class="col-12 sm:col-6">
-            <mat-label for="description">Descripción</mat-label>
-            <textarea matInput id="description" formControlName="description"></textarea>
-          </mat-form-field>
-          <mat-form-field class="col-12 sm:col-6">
-            <mat-label for="genre">Géneros (separados por comas)</mat-label>
-            <input matInput id="genre" formControlName="genre" type="text" />
-          </mat-form-field>
-          <mat-form-field class="col-12 sm:col-6">
+          <mat-form-field class="">
             <mat-label for="director">Director</mat-label>
             <input matInput id="director" formControlName="director" type="text" />
           </mat-form-field>
-          <mat-form-field class="col-12 sm:col-6">
+          <mat-form-field class="col-span-2">
+            <mat-label for="description">Descripción</mat-label>
+            <textarea matInput id="description" formControlName="description"></textarea>
+          </mat-form-field>
+          <mat-form-field class="">
             <mat-label for="releaseYear">Año de lanzamiento</mat-label>
             <input matInput id="releaseYear" formControlName="releaseYear" type="number" />
           </mat-form-field>
@@ -27,24 +23,59 @@
             <mat-label for="rating">Calificación</mat-label>
             <input matInput id="rating" formControlName="rating" type="number" step="0.1" />
           </mat-form-field>
-          
-          <mat-label for="mainImage">Imagen principal</mat-label>
-          <input  id="mainImage" type="file" (change)="onImageSelect($event, 'mainImage')" />
-        
-          <label for="images">Otras imágenes</label>
-          <input  id="images" type="file" multiple (change)="onImageSelect($event, 'images')" />
-
-          <mat-form-field class="col-12 sm:col-6">
+          <mat-form-field class="col-span-2">
+            <mat-label for="genre">Géneros (separados por comas)</mat-label>
+            <input matInput id="genre" formControlName="genre" type="text" />
+          </mat-form-field>
+          <mat-form-field class="col-span-2">
             <mat-label for="cast">Reparto (nombres separados por comas)</mat-label>
             <input matInput id="cast" formControlName="cast" type="text" />
           </mat-form-field>
-
-          <button mat-raised-button type="submit" [disabled]="movieForm.invalid">Guardar película</button>
+          <div class="col-span-2">
+            <mat-label for="mainImage">Imagen principal</mat-label>
+            <input id="mainImage" type="file" (change)="onImageSelect($event, 'mainImage')" />
+          </div>
+          <div class="col-span-2">
+            <label for="images">Otras imágenes</label>
+            <input id="images" type="file" multiple (change)="onImageSelect($event, 'images')" />
+          </div>
+          <div class="flex justify-between col-span-2">
+            <button mat-raised-button
+                    class="action-button" 
+                    type="button" 
+                    [routerLink]="['/movies']" 
+                    routerLinkActive="router-link-active"
+                    >Cancelar</button>
+            <button mat-raised-button
+                    [ngClass]="{'action-button-success': !movieForm.invalid, '': movieForm.invalid}"
+                    type="submit"
+                    [disabled]="movieForm.invalid"
+                    >Guardar película</button>
+            <button mat-raised-button
+                    class="action-button" 
+                    type="button" 
+                    *ngIf="formMode !== 'new'"
+                    (click)="onDelete()"
+                    >Eliminar película</button>
+          </div>
         </form>
       </mat-card-content>
     </mat-card>
   </div>
-  <div class="col-6 sm:col-6">
-    <img src="no-movie-image.jpg" alt="">
+  <div class="col-span-2">
+    <div class="grid grid-cols-4 grid-auto-rows gap-4">
+      <div class="row-span-3 col-span-2">
+        <img [src]="currentMovie.mainImage| movieImage" 
+        alt="">
+      </div>
+      @for (image of currentMovie.images; track $index) {
+        <div class="row-span-1 col-span-1">
+          <img [src]="image| movieImage" 
+          alt="">
+        </div>
+      }
+      
+      
+    </div>
   </div>
 </div>

@@ -1,0 +1,39 @@
+<mat-card>
+    <div class="grid grid-cols-3">
+        <div class="col-1 rounded-l-lg">
+            <img mat-card-image
+                class="h-full"
+                [src]="actor.mainImage| actorImage"
+                [alt]="actor.name + ' photo.'">
+        </div>
+        <div class="col-span-2">
+    
+            <mat-card-header>
+                <mat-card-title>
+                   {{ actor.name }} 
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-chip-listbox>
+                    @for (movie of actor.movies; track $index) {
+                        <p class="chip-element px-2">{{ movie }}</p>
+                    }
+                </mat-chip-listbox>
+            </mat-card-content>
+            <mat-card-actions class="flex justify-between">
+                <button mat-raised-button class="action-button"
+                    [routerLink]="['/actors/edit/', actor.name]"
+                    >
+                    <mat-icon>edit</mat-icon>
+                    Editar
+                </button>
+                <button mat-raised-button class="action-button"
+                    (click)="onMoreInfo()"
+                    >
+                    <mat-icon>info</mat-icon>
+                    Ver Info
+                </button>
+            </mat-card-actions>
+        </div>
+    </div>
+</mat-card>

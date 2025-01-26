@@ -1,1 +1,12 @@
-<p>actors-list-page works!</p>
+<div class="p-5">
+    <div class="my-3 text-3xl text-white font-bold">
+        <h1>Lista de Actores</h1>
+    </div>
+    <div class="p-10 grid sm:grid-cols-2 2xl:grid-cols-4 space-x-3 space-y-5">
+        @for (actor of actors; track $index) {
+            <app-actor-card 
+                [actor]="actor"
+            ></app-actor-card>
+        }
+    </div>
+</div>

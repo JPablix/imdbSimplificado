@@ -6,7 +6,7 @@
       </div>
       <div class="hidden md:flex space-x-4">
         @for (item of navbarItems; track $index){
-          <mat-chip class="text-white hover:text-yellow"
+          <mat-chip class="text-white "
             [routerLink]="item.route"
             [routerLinkActive]="['bg-white-700']"
             [routerLinkActiveOptions]="{exact: true}"

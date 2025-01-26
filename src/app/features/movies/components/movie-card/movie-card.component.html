@@ -1,5 +1,5 @@
 <mat-card>
-    <img mat-card-image [src]="mainImage" [alt]="movie.title + ' poster image.'">
+    <img mat-card-image [src]="movie.mainImage| movieImage" [alt]="movie.title + ' poster image.'">
     <mat-card-header>
         <mat-card-title>
            {{ movie.title }} 
@@ -8,18 +8,19 @@
     <mat-card-content>
         <mat-chip-listbox>
             @for (genre of movie.genre; track $index){
-                <mat-chip>{{ genre }}</mat-chip>
+                <p class="chip-element px-2">{{ genre }}</p>
             }
         </mat-chip-listbox>
     </mat-card-content>
     <mat-card-actions class="flex justify-between">
-        <button mat-raised-button
-            [routerLink]="['/movies', movie.title]"
+        <button mat-raised-button class="action-button"
+            [routerLink]="['/movies/edit/', movie.title]"
             >
             <mat-icon>edit</mat-icon>
             Editar
         </button>
-        <button mat-raised-button
+        <button mat-raised-button class="action-button"
+            (click)="onMoreInfo()"
             >
             <mat-icon>info</mat-icon>
             Ver Info
