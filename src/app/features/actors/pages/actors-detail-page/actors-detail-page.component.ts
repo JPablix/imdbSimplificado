@@ -49,7 +49,7 @@ export class ActorsDetailPageComponent {
       biography: [''],
       mainImage: [null, Validators.required], // Imagen principal
       images: [null], // Otras imágenes
-      movies: ['', Validators.required], // Películas separadas por comas
+      //movies: ['', Validators.required], // Películas separadas por comas
     });
   }
 
@@ -75,12 +75,12 @@ export class ActorsDetailPageComponent {
           return;
         }
 
-        actor.movies = actor.movies || [];
+        //actor.movies = actor.movies || [];
 
         this.actorForm.patchValue({
           ...actor,
           dateOfBirth: actor.dateOfBirth?.split('T')[0],
-          movies: actor.movies.join(', '),
+          //movies: actor.movies.join(', '),
         });
       });
   }
@@ -96,7 +96,7 @@ export class ActorsDetailPageComponent {
     const actorData = { ...this.actorForm.value };
 
     // Asegúrate de que movies sea una cadena antes de hacer split
-    actorData.movies = (actorData.movies || '').split(',').map((movie: string) => movie.trim());
+    //actorData.movies = (actorData.movies || '').split(',').map((movie: string) => movie.trim());
 
     console.log(actorData);
 

@@ -1,4 +1,12 @@
 # Pendientes
+
+## Trabajo en importante
+- [X] Agregar actores a peliculas mediante un search autoComplete
+- [ ] Hacer que en los detalles de un actor se muestren las peliculas en las que aparece
+- [X] Crear servicio en actores que busque las peliculas en las que aparece un actor
+- [ ] Hacer que los chips de actores aparezcan gracias a buscar en que peliculas salen
+- [ ] Quitar el codigo de movies en backend y frontend
+
 ### Generales
 - [ ] Meter 50 peliculas
 - [ ] Meter 50 actores
@@ -20,11 +28,11 @@
 - [X] Leer
 - [X] Actualizar
 - [X] Eliminar
-- [ ] Ver detalles y agregar peliculas
-- [ ] **No permitir titulos repetidos al crear o actualizar (IGUAL AL DE MOVIES)**
-- [ ] Agregar películas a actores mediante un search autoComplete
+- [ ] Ver detalles
+- [ ] Ver peliculas en las que aparece
+- [X] No permitir titulos repetidos al crear o actualizar
+- [X] Agregar películas a actores mediante un search autoComplete
 - [ ] Preguntar antes de borrar
-- [ ] No permitir actualizar o crear un titulo que ya exista
 ### Movies CRUD
 - [X] Mejorar la vista de la detail page
 - [X] Crear
@@ -36,7 +44,6 @@
 - [X] Eliminar
 - [X] No permitir titulos repetidos al crear o actualizar
 - [ ] Preguntar antes de borrar
-- [ ] No permitir actualizar o crear un titulo que ya exista
 
 
 ### Movies Mejoras

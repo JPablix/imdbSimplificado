@@ -27,10 +27,49 @@
             <mat-label for="genre">Géneros (separados por comas)</mat-label>
             <input matInput id="genre" formControlName="genre" type="text" />
           </mat-form-field>
+
+
+       
+
+
+
+
           <mat-form-field class="col-span-2">
             <mat-label for="cast">Reparto (nombres separados por comas)</mat-label>
-            <input matInput id="cast" formControlName="cast" type="text" />
+            <input
+              matInput
+              placeholder="Selecciona actores"
+              aria-label="Selecciona actores"
+              [matAutocomplete]="auto"
+              [formControl]="actorsControl"
+              (keyup.enter)="onActorSelect(actorsControl.value); actorsControl.setValue('')"
+            />
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onActorSelect($event.option.viewValue)">
+              <mat-option *ngFor="let actor of filteredActors | async" [value]="actor.name">
+                {{ actor.name }}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
+          
+          <div>
+            <label>Actores seleccionados:</label>
+            <mat-list dense>
+              <mat-list-item *ngIf="selectedActors?.length === 0">(Ninguno)</mat-list-item>
+              <mat-list-item *ngFor="let actor of selectedActors">
+                {{ actor.name }}
+                <button mat-icon-button type="button" (click)="removeActor(actor)">
+                  <mat-icon>remove_circle</mat-icon>
+                </button>
+              </mat-list-item>
+            </mat-list>
+          </div>
+
+
+
+
+
+
+
           <div class="col-span-2">
             <mat-label for="mainImage">Imagen principal</mat-label>
             <input id="mainImage" type="file" (change)="onImageSelect($event, 'mainImage')" />

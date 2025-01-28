@@ -15,10 +15,10 @@
               <mat-label for="biography">Biografía</mat-label>
               <textarea matInput id="biography" formControlName="biography"></textarea>
             </mat-form-field>
-            <mat-form-field class="col-span-2">
+            <!-- <mat-form-field class="col-span-2">
               <mat-label for="movies">Actuaciones en Películas (separadas por comas)</mat-label>
               <input matInput id="movies" formControlName="movies" type="text" />
-            </mat-form-field>
+            </mat-form-field> -->
             <div class="col-span-2">
               <mat-label for="mainImage">Imagen principal</mat-label>
               <input id="mainImage" type="file" (change)="onImageSelect($event, 'mainImage')" />
@@ -38,13 +38,13 @@
                       [ngClass]="{'action-button-success': !actorForm.invalid, '': actorForm.invalid}"
                       type="submit"
                       [disabled]="actorForm.invalid"
-                      >Guardar película</button>
+                      >Guardar actor</button>
               <button mat-raised-button
                       class="action-button" 
                       type="button" 
                       *ngIf="formMode !== 'new'"
                       (click)="onDelete()"
-                      >Eliminar película</button>
+                      >Eliminar actor</button>
             </div>
           </form>
         </mat-card-content>
