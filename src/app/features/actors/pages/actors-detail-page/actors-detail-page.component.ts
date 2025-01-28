@@ -12,6 +12,7 @@ import { ActorImagePipe } from '../../pipes/actor-image.pipe';
 import { ActorService } from '../../services/actor.service';
 import { Actor } from '../../../../shared/interfaces/actor.interfaces';
 import { switchMap } from 'rxjs';
+import { MoviesDetailPageComponent } from '../../../movies/pages/movies-detail-page/movies-detail-page.component';
 
 @Component({
   selector: 'app-actors-detail-page',
@@ -32,7 +33,7 @@ import { switchMap } from 'rxjs';
 })
 export class ActorsDetailPageComponent {
 
-  public formMode : 'new' | 'edit' = 'new';
+  public formMode: 'new' | 'edit' = 'new';
   actorForm: FormGroup;
 
   constructor(
@@ -48,7 +49,7 @@ export class ActorsDetailPageComponent {
       biography: [''],
       mainImage: [null, Validators.required], // Imagen principal
       images: [null], // Otras imágenes
-      movies: [''], // Películas separadas por comas
+      movies: ['', Validators.required], // Películas separadas por comas
     });
   }
 
@@ -66,7 +67,7 @@ export class ActorsDetailPageComponent {
     // Estamos en modo edición entonces cargamos los datos del actor
     this.activatedRoute.params
       .pipe(
-        switchMap(({name}) => this.actorService.getActorByName(name))
+        switchMap(({ name }) => this.actorService.getActorByName(name))
       )
       .subscribe(actor => {
         if (!actor) {
@@ -78,7 +79,8 @@ export class ActorsDetailPageComponent {
 
         this.actorForm.patchValue({
           ...actor,
-          dateOfBirth: actor.dateOfBirth?.split('T')[0]
+          dateOfBirth: actor.dateOfBirth?.split('T')[0],
+          movies: actor.movies.join(', '),
         });
       });
   }
@@ -94,33 +96,52 @@ export class ActorsDetailPageComponent {
     const actorData = { ...this.actorForm.value };
 
     // Asegúrate de que movies sea una cadena antes de hacer split
-    actorData.movies = (actorData.movies || '').toString().split(',').map((movie: string) => movie.trim());
+    actorData.movies = (actorData.movies || '').split(',').map((movie: string) => movie.trim());
 
     console.log(actorData);
 
-    if (this.formMode === 'edit') {
-      const originalName = this.activatedRoute.snapshot.params['name'];
-      this.actorService.updateActor(actorData, originalName).subscribe({
-        next: actor => {
-          this.snackbar.open('Actor actualizado correctamente', 'Cerrar', {
-              duration: 3000
-            });
-          this.router.navigateByUrl('/actors');
-        },
-        error: (error) => console.error('Error al actualizar el actor', error)
-      });
-    } else {
-      this.actorService.createActor(actorData).subscribe({
-        next: response => {
-          this.snackbar.open('Actor creado correctamente', 'Cerrar', {
+    if (this.formMode === 'new') {
+      // Revisar si el nombre del actor ya existe
+      this.actorService.getActorExists(actorData.name).subscribe(exists => {
+        if (exists) {
+          this.snackbar.open('El nombre del actor ya existe', 'Cerrar', {
             duration: 3000
           });
-          this.router.navigateByUrl('/actors');
-        },
-        error: (error) => console.error('Error al crear el actor', error)
+          return;
+        }
+        this.actorService.createActor(actorData).subscribe({
+          next: response => {
+            this.snackbar.open('Actor creado correctamente', 'Cerrar', {
+              duration: 3000
+            });
+            this.router.navigate(['/actors']);
+          },
+          error: (error) => console.error('Error al crear el actor', error)
+        });
+      });
+    } else {
+      const originalName = this.activatedRoute.snapshot.params['name'];
+      // Revisar si el nombre del actor ya existe
+      this.actorService.getActorExists(actorData.name).subscribe(exists => {
+        if (exists && actorData.name !== originalName) {
+          this.snackbar.open('El nombre del actor ya existe', 'Cerrar', {
+            duration: 3000
+          });
+          return;
+        }
+        this.actorService.updateActor(actorData, originalName).subscribe({
+          next: actor => {
+            this.snackbar.open('Actor actualizado correctamente', 'Cerrar', {
+              duration: 3000
+            });
+            this.router.navigateByUrl('/actors');
+          },
+          error: (error) => console.error('Error al actualizar el actor', error)
+        });
       });
     }
-  };
+  }
+
 
   onDelete(): void {
     const originalName = this.activatedRoute.snapshot.params['name'];

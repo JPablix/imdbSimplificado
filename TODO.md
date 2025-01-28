@@ -20,7 +20,8 @@
 - [X] Leer
 - [X] Actualizar
 - [X] Eliminar
-- [ ] **Ver detalles**
+- [ ] Ver detalles y agregar peliculas
+- [ ] **No permitir titulos repetidos al crear o actualizar (IGUAL AL DE MOVIES)**
 - [ ] Agregar películas a actores mediante un search autoComplete
 - [ ] Preguntar antes de borrar
 - [ ] No permitir actualizar o crear un titulo que ya exista
@@ -33,6 +34,7 @@
 - [X] Reemplazar las imagenes cuando se actualiza?
 - [X] Actualizar
 - [X] Eliminar
+- [X] No permitir titulos repetidos al crear o actualizar
 - [ ] Preguntar antes de borrar
 - [ ] No permitir actualizar o crear un titulo que ya exista
 

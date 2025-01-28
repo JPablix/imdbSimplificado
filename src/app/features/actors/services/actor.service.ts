@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, map,Observable, of } from 'rxjs';
 import { Actor } from '../../../shared/interfaces/actor.interfaces';
 
 @Injectable({
@@ -78,5 +78,13 @@ export class ActorService {
   // Eliminar actor
   deleteActor(name: string): Observable<Actor> {
     return this.httpClient.delete<Actor>(`${this.url}/actors/${name}`);
+  }
+
+  getActorExists(name: string): Observable<boolean> {
+    return this.httpClient.get<Actor>(`${this.url}/actors/${name}`)
+        .pipe(
+            map(actor => !!actor),
+            catchError(() => of(false))
+        );
   }
 }

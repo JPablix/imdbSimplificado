@@ -1,1 +1,32 @@
-<p>info-dialog works!</p>
+<div class="text-white bg-black">
+    <div class="grid grid-cols-5 grid-auto-row">
+        <mat-card class="row-span-2 col-span-2">
+            <img [src]="data.mainImage | actorImage" [alt]="data.name + ' photo.'" />
+        </mat-card>
+        @for (image of data.images; track $index) {
+            <div class="row-span-1 col-span-1">
+              <img [src]="image| actorImage" 
+              alt="">
+            </div>
+        }
+    </div>
+    <div class="p-5">
+        <div class="flex justify-between">
+            <div>
+                <h2 class="text-4xl">{{ data.name }}</h2>
+
+            </div>
+            <div class="grid grid-flow-col self-start">
+                @for (movie of data.movies; track $index){
+                    <p class="chip-element px-2 ">{{ movie }}</p>
+                }
+            </div>
+
+        </div>
+        <p>{{ data.biography }}</p>
+        <mat-divider class="divider"></mat-divider>
+        <p><strong>Fecha de Nacimiento:</strong> {{ data.dateOfBirth }}</p>
+        
+    </div>
+
+</div>

@@ -1,16 +1,16 @@
 <nav class="bg-red-600 shadow-md p-4">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div class="mx-auto flex justify-between items-center">
       <div class="flex items-center">
         <mat-icon aria-hidden="false" aria-label="Movie Logo" fontIcon="movie"></mat-icon>
         <span class="ml-3 text-xl font-semibold">IMDb Simplificado</span>
       </div>
       <div class="hidden md:flex space-x-4">
         @for (item of navbarItems; track $index){
-          <mat-chip class="text-white "
+          <a class="nav-item"
             [routerLink]="item.route"
             [routerLinkActive]="['bg-white-700']"
             [routerLinkActiveOptions]="{exact: true}"
-          >{{ item.name }}</mat-chip>
+          >{{ item.name }}</a>
         }
       </div>
     </div>

@@ -18,7 +18,9 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   public navbarItems = [
-    { name: 'Actors', route: '/actors' },
-    { name: 'Movies', route: '/movies' }, //TOOD: Add user route??
+    { name: 'Listado Películas', route: '/movies' },
+    { name: 'Añadir Películas', route: '/movies/new-movie' },
+    { name: 'Listado Actores', route: '/actors' },
+    { name: 'Añadir Actores', route: '/actors/new-actor' },
   ];
 }

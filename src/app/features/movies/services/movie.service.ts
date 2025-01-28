@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, map } from 'rxjs';
 import { Movie } from '../../../shared/interfaces/movie.interfaces';
 
 @Injectable({
@@ -34,9 +34,9 @@ export class MovieService {
     formData.append('description', movieData.description || '');
     formData.append('genre', JSON.stringify(movieData.genre));
     formData.append('director', movieData.director || '');
-    formData.append('releaseYear', movieData.releaseYear.toString());
-    formData.append('rating', movieData.rating.toString());
-    formData.append('cast', JSON.stringify(movieData.cast));
+    formData.append('releaseYear', movieData.releaseYear.toString() || '');
+    formData.append('rating', movieData.rating.toString() || '');
+    formData.append('cast', JSON.stringify(movieData.cast) || '');
 
     // Subir imagen principal
     if (movieData.mainImage && movieData.mainImage[0]) {
@@ -116,6 +116,14 @@ export class MovieService {
 
   deleteMovie(title: string): Observable<Movie> {
     return this.httpClient.delete<Movie>(`${this.url}/movies/${title}`);
+  }
+
+  getMovieExists(title: string): Observable<boolean> {
+    return this.httpClient.get<Movie>(`${this.url}/movies/${title}`)
+        .pipe(
+            map(movie => !!movie), // Returns true if movie exists, false otherwise
+            catchError(() => of(false)) // Return false if there's an error (e.g., movie not found)
+        );
   }
 
 }
