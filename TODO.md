@@ -1,35 +1,28 @@
 # Pendientes
 
-## Trabajo en importante
-- [X] Agregar actores a peliculas mediante un search autoComplete
-- [ ] Hacer que en los detalles de un actor se muestren las peliculas en las que aparece
-- [X] Crear servicio en actores que busque las peliculas en las que aparece un actor
-- [ ] Hacer que los chips de actores aparezcan gracias a buscar en que peliculas salen
-- [ ] Quitar el codigo de movies en backend y frontend
-
-### Generales
-- [ ] Meter 50 peliculas
-- [ ] Meter 50 actores
-- [ ] Paginación en movies list
-- [ ] Paginación en actors list
-- [ ] Agregar footer
-
+## Trabajo en proceso
 ### Busqueda
-- [ ] Buscar por actor por nombre
-- [ ] Buscar por pelicula por
+- [ ] Buscar actores por nombre
+- [ ] Buscar películas por:
     - [ ] Nombre
     - [ ] Año
     - [ ] Genero
     - [ ] Rating
 
+### Generales
+- [ ] Meter 50 peliculas
+- [ ] Meter 50 actores
+- [X] Paginación en movies list
+- [X] Paginación en actors list
+- [ ] Agregar footer
 
 ### Actors CRUD
 - [X] Crear
 - [X] Leer
 - [X] Actualizar
 - [X] Eliminar
-- [ ] Ver detalles
-- [ ] Ver peliculas en las que aparece
+- [X] Ver detalles
+- [X] Ver peliculas en las que aparece
 - [X] No permitir titulos repetidos al crear o actualizar
 - [X] Agregar películas a actores mediante un search autoComplete
 - [ ] Preguntar antes de borrar
@@ -51,3 +44,10 @@
 - [X] Lograr renderizar las omagenes
 - [X] Lograr subir las imagenes al servidor
 - [X] Lograr pedir las imagenes al servidor
+
+### Otros
+- [X] Agregar actores a peliculas mediante un search autoComplete
+- [X] Hacer que en los detalles de un actor se muestren las peliculas en las que aparece
+- [X] Crear servicio en actores que busque las peliculas en las que aparece un actor
+- [X] Hacer que los chips de actores aparezcan gracias a buscar en que peliculas salen
+- [X] Quitar el array de movies de los actores en backend y frontend
