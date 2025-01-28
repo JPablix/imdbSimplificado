@@ -3,12 +3,14 @@ import { Movie } from '../../../../shared/interfaces/movie.interfaces';
 import { MovieService } from '../../services/movie.service';
 import { CommonModule } from '@angular/common';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-movies-list-page',
   imports: [
     CommonModule,
-    MovieCardComponent
+    MovieCardComponent,
+    RouterModule
   ],
   templateUrl: './movies-list-page.component.html',
   styleUrl: './movies-list-page.component.scss'

@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { ActorCardComponent } from '../../components/actor-card/actor-card.component';
 import { ActorService } from '../../services/actor.service';
 import { Actor } from '../../../../shared/interfaces/actor.interfaces';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-actors-list-page',
   imports: [
     CommonModule,
-    ActorCardComponent
+    ActorCardComponent,
+    RouterModule  
   ],
   templateUrl: './actors-list-page.component.html',
   styleUrl: './actors-list-page.component.scss'
