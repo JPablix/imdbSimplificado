@@ -11,22 +11,22 @@
         }
     </div>
     <div class="p-5">
-        <div class="flex justify-between">
-            <div>
-                <h2 class="text-4xl">{{ data.name }}</h2>
-
-            </div>
-            <div class="grid grid-flow-col self-start">
-                @for (movie of data.movies; track $index){
-                    <p class="chip-element px-2 ">{{ movie }}</p>
-                }
-            </div>
-
-        </div>
         <p>{{ data.biography }}</p>
         <mat-divider class="divider"></mat-divider>
         <p><strong>Fecha de Nacimiento:</strong> {{ data.dateOfBirth }}</p>
-        
+        <mat-divider class="divider"></mat-divider>
+        <p><strong>Participaciones:</strong></p>
+        <div class="grid grid-cols-5 self-start space-x-2">
+            @for (movie of movies; track $index){
+                <mat-card>
+                    <img mat-card-image [src]="movie.mainImage | movieImage" [alt]="movie.title + ' photo.'" />
+                    <mat-card-content>
+                        <h3>{{ movie.title }}</h3>
+                    </mat-card-content>
+                </mat-card>
+            }
+        </div>
+        <h2 *ngIf="movies.length == 0">(Sin Registros)</h2>
     </div>
 
 </div>

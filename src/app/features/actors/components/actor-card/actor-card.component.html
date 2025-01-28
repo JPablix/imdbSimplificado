@@ -13,13 +13,6 @@
                    {{ actor.name }} 
                 </mat-card-title>
             </mat-card-header>
-            <mat-card-content>
-                <mat-chip-listbox>
-                    @for (movie of actor.movies; track $index) {
-                        <p class="chip-element px-2">{{ movie }}</p>
-                    }
-                </mat-chip-listbox>
-            </mat-card-content>
             <mat-card-actions class="flex justify-between">
                 <button mat-raised-button class="action-button"
                     [routerLink]="['/actors/edit/', actor.name]"

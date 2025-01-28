@@ -26,6 +26,10 @@ export class MovieService {
       ;
   }
 
+  getActorStarIn(name: string): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>(`${this.url}/movies/actor/${name}`);
+  }
+
   createMovie(movieData: any): Observable<Movie> {
     const formData = new FormData();
 
