@@ -1,0 +1,95 @@
+<div class="p-5 text-white">
+  <div class="my-3 flex justify-between items-center">
+    <h1 class="text-3xl text-white font-bold">Buscar</h1>
+  </div>
+
+  <div class="p-5 filters">
+    <!-- Select para elegir entre Actores y Películas -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Tipo de búsqueda</mat-label>
+      <mat-select [formControl]="searchTypeControl">
+        <mat-option *ngFor="let option of searchTypeOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Búsqueda de Actores -->
+    <div *ngIf="searchForm.get('searchType')?.value === 'Actores'">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Buscar actor</mat-label>
+        <input type="text" matInput [formControl]="actorNameControl" [matAutocomplete]="autoActor" />
+        <mat-autocomplete #autoActor="matAutocomplete">
+          <mat-option *ngFor="let actor of filteredActors | async" [value]="actor.name"
+            (onSelectionChange)="onActorSelected(actor)">
+            {{ actor.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <!-- Búsqueda de Películas -->
+    <div *ngIf="searchForm.get('searchType')?.value === 'Películas'">
+      <!-- Búsqueda por nombre -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Buscar película por nombre</mat-label>
+        <input type="text" matInput [formControl]="movieNameControl" [matAutocomplete]="autoMovie" />
+        <mat-autocomplete #autoMovie="matAutocomplete">
+          <mat-option *ngFor="let movie of filteredMovies | async" [value]="movie.title"
+            (onSelectionChange)="onMovieSelected(movie)">
+            {{ movie.title }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- Búsqueda por año -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Buscar película por año</mat-label>
+        <input type="number" matInput [formControl]="movieYearControl" />
+      </mat-form-field>
+
+      <!-- Búsqueda por género -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Buscar película por género</mat-label>
+        <input type="text" matInput [formControl]="movieGenreControl" [matAutocomplete]="autoGenre" />
+        <mat-autocomplete #autoGenre="matAutocomplete">
+          <mat-option *ngFor="let genre of filteredGenres | async" [value]="genre"
+            (onSelectionChange)="onGenreSelected(genre)">
+            {{ genre }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- Búsqueda por calificación -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Buscar película por calificación</mat-label>
+        <mat-select [formControl]="movieRatingControl">
+          <mat-option *ngFor="let rating of ratings" [value]="rating" (onSelectionChange)="onRatingSelected(rating)">
+            {{ rating }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Actores por nombre directo-->
+  <div *ngIf="searchForm.get('searchType')?.value === 'Actores' && directActor"
+    class="p-10 grid sm:grid-cols-2 2xl:grid-cols-4 space-x-3 space-y-5">
+    <app-actor-card [actor]="directActor"></app-actor-card>
+  </div>
+
+  <!-- Peliculas por titulo directo-->
+  <div *ngIf="searchForm.get('searchType')?.value === 'Películas' && directMovie"
+    class="p-15 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 space-x-3 space-y-5">
+    <app-movie-card [movie]="directMovie"></app-movie-card>
+  </div>
+
+  <!-- Filtrado de peliculas -->
+  <div *ngIf="searchForm.get('searchType')?.value === 'Películas' && someMovies.length > 0"
+    class="p-10 grid sm:grid-cols-2 2xl:grid-cols-4 space-x-3 space-y-5">
+    @for (movie of someMovies; track $index) {
+    <app-movie-card [movie]="movie"></app-movie-card>
+    }
+  </div>
+
+</div>

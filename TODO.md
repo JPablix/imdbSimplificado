@@ -2,8 +2,13 @@
 
 ## Trabajo en proceso
 ### Busqueda
-- [ ] Buscar actores por nombre
+- [X] Buscar actores por nombre
 - [ ] Buscar películas por:
+    - [X] Nombre
+    - [ ] Año
+    - [X] Genero
+    - [X] Rating
+- [ ] Ordenar películas por:
     - [ ] Nombre
     - [ ] Año
     - [ ] Genero
