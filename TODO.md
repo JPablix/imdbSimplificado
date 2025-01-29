@@ -1,18 +1,13 @@
 # Pendientes
 
 ## Trabajo en proceso
-### Busqueda
-- [X] Buscar actores por nombre
-- [ ] Buscar películas por:
-    - [X] Nombre
-    - [ ] Año
-    - [X] Genero
-    - [X] Rating
-- [ ] Ordenar películas por:
-    - [ ] Nombre
-    - [ ] Año
-    - [ ] Genero
-    - [ ] Rating
+### Auth
+- [ ] Crear roles de usuario      
+- [ ] Implementar 
+- [ ] Crear login       Obtener Usuario
+- [ ] Crear registro    Crear Usuario
+- [ ] Crear logout
+- [ ] Mostrar botones de editar y añadir solo para Admins
 
 ### Generales
 - [ ] Meter 50 peliculas
@@ -20,6 +15,22 @@
 - [X] Paginación en movies list
 - [X] Paginación en actors list
 - [ ] Agregar footer
+- [ ] Documentación de la API con postman
+
+### Busqueda
+- [X] Buscar actores por nombre
+- [X] Buscar películas por:
+    - [X] Nombre
+    - [X] Año
+    - [X] Genero
+    - [X] Rating
+- [X] Ordenar películas por:
+    - [X] Nombre
+    - [X] Año
+    - [X] Genero
+    - [X] Rating
+- [X] Ordenar actores por:
+    - [X] Nombre
 
 ### Actors CRUD
 - [X] Crear

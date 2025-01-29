@@ -5,12 +5,14 @@ import { ActorService } from '../../services/actor.service';
 import { Actor } from '../../../../shared/interfaces/actor.interfaces';
 import { RouterModule } from '@angular/router';
 import { Movie } from '../../../../shared/interfaces/movie.interfaces';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-actors-list-page',
   imports: [
     CommonModule,
     ActorCardComponent,
-    RouterModule  
+    RouterModule,
+    MatIconModule 
   ],
   templateUrl: './actors-list-page.component.html',
   styleUrl: './actors-list-page.component.scss'
@@ -22,6 +24,8 @@ export class ActorsListPageComponent {
   public itemsPerPage: number = 8;
   public totalItems: number = 0;
   public pageSizeOptions: number[] = [4, 8, 16, 22, 52];
+  public sortOrder: 'asc' | 'desc' = 'asc';
+  private sortBy: keyof Actor = 'name';
 
   constructor(
     private actorService: ActorService
@@ -61,5 +65,29 @@ export class ActorsListPageComponent {
 
   get totalPages(): number {
     return Math.ceil(this.totalItems / this.itemsPerPage);
+  }
+
+  sortActors(by: keyof Actor): void {
+    this.sortBy = by;
+    this.actors.sort((a, b) => {
+      const valueA = a[by];
+      const valueB = b[by];
+  
+      if (valueA === undefined || valueB === undefined) {
+        return 0;
+      }
+  
+      if (valueA < valueB) return this.sortOrder === 'asc' ? -1 : 1;
+      if (valueA > valueB) return this.sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
+    this.updatePaginatedActors();
+  }
+  
+  toggleSortOrder(): void {
+    this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    if (this.sortBy) {
+      this.sortActors(this.sortBy);
+    }
   }
 }

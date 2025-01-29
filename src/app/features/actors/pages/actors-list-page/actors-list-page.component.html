@@ -7,14 +7,28 @@
     </div>
 
     <!-- Select para cambiar el número de películas por página -->
-    <div class="my-3">
-        <label for="itemsPerPage" class="text-white">Películas por página:</label>
-        <select id="itemsPerPage" (change)="onPageSizeChange($event)" class="ml-2 p-1 pages-select">
+    <div class="my-3 flex items-center justify-between">
+        <!-- Botones para ordenar los actores -->
+        <div class="my-3 flex items-center space-x-4">
+          <label class="text-white">Ordenar por:</label>
+          <button (click)="sortActors('name')" class="p-2 nav-item"><small>Nombre</small></button>
+          <mat-icon class="text-white">swap_vert</mat-icon>
+          <button (click)="toggleSortOrder()" class="p-2 nav-item">
+            <small>
+              {{ sortOrder === 'asc' ? 'Ascendente' : 'Descendente' }}
+            </small>
+          </button>
+        </div>
+        <!-- Select de páginas -->
+        <div>
+          <label for="itemsPerPage" class="text-white">Actores por página:</label>
+          <select id="itemsPerPage" (change)="onPageSizeChange($event)" class="ml-2 p-1 pages-select">
             <option *ngFor="let option of pageSizeOptions" [value]="option" [selected]="option === itemsPerPage">
-                {{ option }}
+              {{ option }}
             </option>
-        </select>
-    </div>
+          </select>
+        </div>
+      </div>
 
     <div class="p-10 grid sm:grid-cols-2 2xl:grid-cols-4 space-x-3 space-y-5">
         @for (actor of paginatedActors; track $index) {
