@@ -1,0 +1,11 @@
+.action-button {
+    background-color: #dc2626 !important;
+    color: white !important;
+}
+
+.link-button {
+    &:hover{
+        color: #dc2626;
+        text-decoration: underline;
+    }
+}

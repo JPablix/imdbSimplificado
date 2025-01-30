@@ -16,6 +16,7 @@
             <mat-card-actions class="flex justify-between">
                 <button mat-raised-button class="action-button"
                     [routerLink]="['/actors/edit/', actor.name]"
+                    *ngIf="authService.currentUserValue?.role === 'Admin'"
                     >
                     <mat-icon>edit</mat-icon>
                     Editar

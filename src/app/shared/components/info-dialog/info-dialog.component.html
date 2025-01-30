@@ -1,0 +1,15 @@
+<div class="p-4">
+    <h2 class="text-lg mb-4">{{ data.message }}</h2>
+    <div class="flex justify-end gap-2">
+      <mat-card-actions>
+        <button
+          *ngFor="let action of data.actions"
+          class="action-button"
+          mat-raised-button
+          (click)="onAction(action)"
+        >
+          {{ action.tag }}
+        </button>
+      </mat-card-actions>
+    </div>
+  </div>

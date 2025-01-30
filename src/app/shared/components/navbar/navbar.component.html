@@ -7,10 +7,16 @@
       <div class="hidden md:flex space-x-4">
         @for (item of navbarItems; track $index){
           <a class="nav-item"
+            *ngIf="authService.currentUserValue"
             [routerLink]="item.route"
             [routerLinkActive]="['bg-white-700']"
             [routerLinkActiveOptions]="{exact: true}"
           >{{ item.name }}</a>
+        }
+        @if (authService.currentUserValue) {
+          <button class="nav-item" routerLink="/auth/login" (click)="logout()">Logout</button>
+        } @else {
+          <a class="nav-item" routerLink="/auth/login">Login</a>
         }
       </div>
     </div>

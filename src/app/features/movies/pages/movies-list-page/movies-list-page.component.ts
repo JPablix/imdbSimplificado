@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-movies-list-page',
@@ -28,7 +29,8 @@ export class MoviesListPageComponent {
   private sortBy: keyof Movie = 'title';
 
   constructor(
-    private movieService: MovieService
+    private movieService: MovieService,
+    public authService: AuthService,
   ) {}
 
   ngOnInit(): void {

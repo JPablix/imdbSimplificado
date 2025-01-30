@@ -3,6 +3,7 @@
         <h1 class="text-3xl text-white font-bold">Lista de Actores</h1>
         <a class="text-2xl nav-item"
             [routerLink]="'/movies/new-movie'"
+            *ngIf="authService.currentUserValue?.role === 'Admin'"
           >Añadir Actores</a>
     </div>
 

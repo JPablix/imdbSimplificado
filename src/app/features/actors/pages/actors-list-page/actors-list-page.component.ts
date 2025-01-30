@@ -6,6 +6,7 @@ import { Actor } from '../../../../shared/interfaces/actor.interfaces';
 import { RouterModule } from '@angular/router';
 import { Movie } from '../../../../shared/interfaces/movie.interfaces';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../../auth/services/auth.service';
 @Component({
   selector: 'app-actors-list-page',
   imports: [
@@ -28,7 +29,8 @@ export class ActorsListPageComponent {
   private sortBy: keyof Actor = 'name';
 
   constructor(
-    private actorService: ActorService
+    private actorService: ActorService,
+    public authService: AuthService,
   ) {}
 
   ngOnInit(): void {

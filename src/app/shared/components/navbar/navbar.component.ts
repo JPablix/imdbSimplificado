@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../../features/auth/services/auth.service';
 @Component({
   selector: 'app-navbar',
   imports: [
@@ -18,7 +19,13 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   public navbarItems = [
-    { name: 'Listado Películas', route: '/movies' },
-    { name: 'Listado Actores', route: '/actors' },
+    { name: 'Listado Películas', route: '/movies'},
+    { name: 'Listado Actores', route: '/actors'},
   ];
+
+  constructor(public authService: AuthService) {}
+
+  logout() {
+    this.authService.logout();
+  }
 }

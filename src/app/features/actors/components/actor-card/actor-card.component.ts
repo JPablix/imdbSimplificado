@@ -9,6 +9,7 @@ import { Actor } from '../../../../shared/interfaces/actor.interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../../../actors/components/info-dialog/info-dialog.component';
 import { ActorImagePipe } from '../../pipes/actor-image.pipe';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-actor-card',
@@ -29,7 +30,8 @@ export class ActorCardComponent {
   public actor!: Actor;
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public authService: AuthService,
   ) { }
 
   onMoreInfo(): void {

@@ -2,12 +2,12 @@
 
 ## Trabajo en proceso
 ### Auth
-- [ ] Crear roles de usuario      
-- [ ] Implementar 
-- [ ] Crear login       Obtener Usuario
-- [ ] Crear registro    Crear Usuario
-- [ ] Crear logout
-- [ ] Mostrar botones de editar y añadir solo para Admins
+- [X] Crear roles de usuario      
+- [X] Implementar 
+- [X] Crear login       Obtener Usuario
+- [X] Crear registro    Crear Usuario
+- [X] Crear logout
+- [X] Mostrar botones de editar y añadir solo para Admins
 
 ### Generales
 - [ ] Meter 50 peliculas

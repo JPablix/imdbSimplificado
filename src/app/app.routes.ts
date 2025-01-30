@@ -5,39 +5,57 @@ import { ActorsListPageComponent } from './features/actors/pages/actors-list-pag
 import { MoviesDetailPageComponent } from './features/movies/pages/movies-detail-page/movies-detail-page.component';
 import { ActorsDetailPageComponent } from './features/actors/pages/actors-detail-page/actors-detail-page.component';
 import { SearchComponent } from './shared/components/search/search.component';
+import { AuthGuard } from './features/auth/guards/auth.guard';
+import { AdminGuard } from './features/auth/guards/admin.guard';
 
 export const routes: Routes = [
     {
         path: '',
+        redirectTo: 'auth/login',
+        pathMatch: 'full'
+    },
+    {
+        path: '',
         component: LayoutComponent,
         children: [
+            { 
+                path: 'auth',
+                loadChildren: () => import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
+            },
             {
                 path: 'movies',
                 component: MoviesListPageComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: 'movies/new-movie',
-                component: MoviesDetailPageComponent
+                component: MoviesDetailPageComponent,
+                canActivate: [AuthGuard, AdminGuard]
             },
             {
                 path: 'movies/edit/:title',
-                component: MoviesDetailPageComponent
+                component: MoviesDetailPageComponent,
+                canActivate: [AuthGuard, AdminGuard]
             },
             {
                 path: 'actors',
-                component: ActorsListPageComponent
+                component: ActorsListPageComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: 'actors/new-actor',
-                component: ActorsDetailPageComponent
+                component: ActorsDetailPageComponent,
+                canActivate: [AuthGuard, AdminGuard]
             },
             {
                 path: 'actors/edit/:name',
-                component: ActorsDetailPageComponent
+                component: ActorsDetailPageComponent,
+                canActivate: [AuthGuard, AdminGuard]
             },
             {
                 path: 'search',
-                component: SearchComponent
+                component: SearchComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: '**',

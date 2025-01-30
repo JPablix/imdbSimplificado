@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { MovieImagePipe } from '../../pipes/movie-image.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -29,7 +30,8 @@ export class MovieCardComponent {
   public movie!: Movie;
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public authService: AuthService,
   ) { }
 
   onMoreInfo(): void {
