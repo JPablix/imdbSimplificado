@@ -13,6 +13,8 @@ import { ActorService } from '../../services/actor.service';
 import { Actor } from '../../../../shared/interfaces/actor.interfaces';
 import { switchMap } from 'rxjs';
 import { MoviesDetailPageComponent } from '../../../movies/pages/movies-detail-page/movies-detail-page.component';
+import { InfoDialogComponent, InfoDialogData } from '../../../../shared/components/info-dialog/info-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-actors-detail-page',
@@ -42,6 +44,7 @@ export class ActorsDetailPageComponent {
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog
   ) {
     this.actorForm = this.fb.group({
       name: ['', Validators.required],
@@ -49,7 +52,6 @@ export class ActorsDetailPageComponent {
       biography: [''],
       mainImage: [null, Validators.required], // Imagen principal
       images: [null], // Otras imágenes
-      //movies: ['', Validators.required], // Películas separadas por comas
     });
   }
 
@@ -75,12 +77,9 @@ export class ActorsDetailPageComponent {
           return;
         }
 
-        //actor.movies = actor.movies || [];
-
         this.actorForm.patchValue({
           ...actor,
-          dateOfBirth: actor.dateOfBirth?.split('T')[0],
-          //movies: actor.movies.join(', '),
+          dateOfBirth: actor.dateOfBirth?.split('T')[0]
         });
       });
   }
@@ -94,9 +93,6 @@ export class ActorsDetailPageComponent {
 
   onSubmit(): void {
     const actorData = { ...this.actorForm.value };
-
-    // Asegúrate de que movies sea una cadena antes de hacer split
-    //actorData.movies = (actorData.movies || '').split(',').map((movie: string) => movie.trim());
 
     console.log(actorData);
 
@@ -144,15 +140,33 @@ export class ActorsDetailPageComponent {
 
 
   onDelete(): void {
-    const originalName = this.activatedRoute.snapshot.params['name'];
-    this.actorService.deleteActor(originalName).subscribe({
-      next: (response) => {
-        this.snackbar.open('Actor eliminado correctamente', 'Cerrar', {
-          duration: 3000
-        });
-        this.router.navigateByUrl('/actors');
-      },
-      error: (error) => console.error('Error al eliminar el actor', error)
+    const dialogData: InfoDialogData = {
+      message: '¿Estás seguro de que deseas eliminar este actor?',
+      actions: [
+        {
+          tag: 'Cancelar',
+          action: () => console.log('Cancelado')
+        },
+        {
+          tag: 'Eliminar',
+          action: () => {
+            const originalName = this.activatedRoute.snapshot.params['name'];
+            this.actorService.deleteActor(originalName).subscribe({
+              next: (response) => {
+                this.snackbar.open('Actor eliminado correctamente', 'Cerrar', {
+                  duration: 3000
+                });
+                this.router.navigateByUrl('/actors');
+              },
+              error: (error) => console.error('Error al eliminar el actor', error)
+            });
+          }
+        }
+      ]
+    };
+  
+    this.dialog.open(InfoDialogComponent, {
+      data: dialogData
     });
   }
 }

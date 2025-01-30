@@ -19,6 +19,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatListModule} from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
+import { InfoDialogComponent, InfoDialogData } from '../../../../shared/components/info-dialog/info-dialog.component';
 @Component({
   selector: 'app-movies-detail-page',
   imports: [
@@ -60,9 +61,6 @@ export class MoviesDetailPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private actorService: ActorService,
     private dialog: MatDialog
-
-
-
   ) {
     this.movieForm = this.fb.group({
       title: ['', Validators.required],
@@ -222,15 +220,33 @@ export class MoviesDetailPageComponent implements OnInit {
   }
 
   onDelete(): void {
-    const originalTitle = this.activatedRoute.snapshot.params['title'];
-    this.movieService.deleteMovie(originalTitle).subscribe({
-      next: (response) => {
-        this.snackbar.open('Película eliminada con éxito', 'Cerrar', {
-          duration: 3000,
-        });
-        this.router.navigate(['/movies']);
-      },
-      error: (error) => console.error('Error al eliminar la película:', error),
+    const dialogData: InfoDialogData = {
+      message: '¿Estás seguro de que deseas eliminar esta película?',
+      actions: [
+        {
+          tag: 'Cancelar',
+          action: () => console.log('Cancelado')
+        },
+        {
+          tag: 'Eliminar',
+          action: () => {
+            const originalTitle = this.activatedRoute.snapshot.params['title'];
+            this.movieService.deleteMovie(originalTitle).subscribe({
+              next: (response) => {
+                this.snackbar.open('Película eliminada con éxito', 'Cerrar', {
+                  duration: 3000,
+                });
+                this.router.navigate(['/movies']);
+              },
+              error: (error) => console.error('Error al eliminar la película:', error),
+            });
+          }
+        }
+      ]
+    };
+  
+    this.dialog.open(InfoDialogComponent, {
+      data: dialogData
     });
   }
 }
