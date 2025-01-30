@@ -10,12 +10,12 @@
 - [X] Mostrar botones de editar y añadir solo para Admins
 
 ### Generales
-- [ ] Meter 50 peliculas
-- [ ] Meter 50 actores
+- [X] Meter 50 peliculas
+- [X] Meter 50 actores
 - [X] Paginación en movies list
 - [X] Paginación en actors list
-- [ ] Agregar footer
-- [ ] Documentación de la API con postman
+- [X] Agregar footer
+- [X] Documentación de la API con postman
 
 ### Busqueda
 - [X] Buscar actores por nombre
@@ -41,7 +41,7 @@
 - [X] Ver peliculas en las que aparece
 - [X] No permitir titulos repetidos al crear o actualizar
 - [X] Agregar películas a actores mediante un search autoComplete
-- [ ] Preguntar antes de borrar
+- [X] Preguntar antes de borrar
 ### Movies CRUD
 - [X] Mejorar la vista de la detail page
 - [X] Crear
@@ -52,8 +52,7 @@
 - [X] Actualizar
 - [X] Eliminar
 - [X] No permitir titulos repetidos al crear o actualizar
-- [ ] Preguntar antes de borrar
-
+- [X] Preguntar antes de borrar
 
 ### Movies Mejoras
 - [X] Cambiar la estructura de MOVIE para tener cosas más sensillas y poder así meter la image path
