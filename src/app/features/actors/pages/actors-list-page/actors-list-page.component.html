@@ -2,7 +2,7 @@
     <div class="my-3 flex justify-between items-center">
         <h1 class="text-3xl text-white font-bold">Lista de Actores</h1>
         <a class="text-2xl nav-item"
-            [routerLink]="'/movies/new-movie'"
+            [routerLink]="'/actors/new-actor'"
             *ngIf="authService.currentUserValue?.role === 'Admin'"
           >Añadir Actores</a>
     </div>
