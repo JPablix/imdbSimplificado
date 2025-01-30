@@ -4,7 +4,7 @@
         <mat-icon aria-hidden="false" aria-label="Movie Logo" fontIcon="movie"></mat-icon>
         <span class="ml-3 text-xl font-semibold">IMDb Simplificado</span>
       </div>
-      <div class="hidden md:flex space-x-4">
+      <div class="hidden md:flex justify-evenly space-x-4">
         @for (item of navbarItems; track $index){
           <a class="nav-item"
             *ngIf="authService.currentUserValue"
@@ -13,11 +13,11 @@
             [routerLinkActiveOptions]="{exact: true}"
           >{{ item.name }}</a>
         }
-        @if (authService.currentUserValue) {
-          <button class="nav-item" routerLink="/auth/login" (click)="logout()">Logout</button>
-        } @else {
-          <a class="nav-item" routerLink="/auth/login">Login</a>
-        }
       </div>
+      @if (authService.currentUserValue) {
+        <button class="nav-item" routerLink="/auth/login" (click)="logout()">Logout</button>
+      } @else {
+        <a class="nav-item" routerLink="/auth/login">Login</a>
+      }
     </div>
 </nav>

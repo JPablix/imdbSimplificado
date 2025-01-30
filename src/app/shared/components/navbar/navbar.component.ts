@@ -19,8 +19,9 @@ import { AuthService } from '../../../features/auth/services/auth.service';
 })
 export class NavbarComponent {
   public navbarItems = [
+    { name: 'Buscar', route: '/search'},
     { name: 'Listado Películas', route: '/movies'},
-    { name: 'Listado Actores', route: '/actors'},
+    { name: 'Listado Actores', route: '/actors'}
   ];
 
   constructor(public authService: AuthService) {}
